@@ -1,21 +1,19 @@
+import Cookies from 'js-cookie';
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import { api } from '../services/api'
 import { Container } from '../styles/pages/ShowUsers'
+import withPrivateRoute from './withPrivateRoute';
+import { useRouter } from 'next/router';
 
-interface Users {
-  id: string;
-  email: string;
-}
 
-export default function showUsers() {
-  const [users, setUsers] = useState<Users[]>([]);
+const showUsers: React.FC = () => {
+  const router = useRouter()
 
-  useEffect(() => {
-    api.get('users').then(response => {
-      setUsers(response.data);
-    });
-  }, []);
+  function logout() {
+    Cookies.remove('token');
+    Cookies.remove('userId');
+
+    router.push('/');
+  }
 
   return (
     <Container>
@@ -24,19 +22,14 @@ export default function showUsers() {
       </Head>
 
       <main>
-        <h1>Carnage</h1>
+        <h2>Carnage</h2>
 
-        {users.map(users => {
-          return (
-
-            <div className="users" key={users.id}>
-              <label htmlFor="">User: Id</label><p>{ users.id }</p>
-              <label htmlFor="">User: E-mail</label><p>{users.email}</p>
-            </div>
-          );
-        })}       
+        <p>{}</p>
+        <h1 onClick={logout}>Logout</h1> 
       </main>
 
     </Container>
   )
 }
+
+export default withPrivateRoute(showUsers);
