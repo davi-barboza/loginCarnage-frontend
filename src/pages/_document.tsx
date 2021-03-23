@@ -34,7 +34,9 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8"/>
 
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"/>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
+          <link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
 
           <link rel="sortcut icon" href="favicon.png" type="image/png" />
         </Head>

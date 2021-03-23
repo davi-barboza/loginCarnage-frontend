@@ -7,16 +7,11 @@ export const Container = styled.form`
   flex-direction: column;
   align-items: center;
 
-  /* .carnageFace {
-    display: none;
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    width: 50px;
-  } */
+  z-index: 1;
 
-  h2 {
-    margin: 20px 0;
+  img{
+    width: 22rem;
+    margin-bottom: 30px;
   }
 
   input {
@@ -34,7 +29,7 @@ export const Container = styled.form`
   }
 
   button {
-    margin: 20px 0;
+    margin-top: 20px;
     padding: 5px 20px;
 
     border: solid 2px ${props => props.theme.colors.text};
@@ -49,34 +44,10 @@ export const Container = styled.form`
     transition: .3s
   }
 
-  .loginFooter {
-    width: 100%;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-
-    display: flex;
-    justify-content: space-evenly;
-  }
-  a {
-    color: ${props => props.theme.colors.primary};
-    font-weight: 600;
-  }
-  .forgotPassword {
-    margin-top: 10px;
-    color: ${props => props.theme.colors.link};
-    cursor: pointer;
-  }
-
-  .carnageName {
+  .footer {
     margin-top: 20px;
-    width: 170px;
   }
 
-  @media(max-width: 630px){
-    .carnageFace {
-      display: block;
-    }
-  }
   @media(max-width: 500px){
     padding: 0;
     padding-top: 20px;

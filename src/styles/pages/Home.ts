@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import bgMain from '../../assets/bg-main.png';
-import bgLogin from '../../assets/bg-login.jpg';
+import bgMain from '../../assets/bg-chars.jpg';
 
 export const Container = styled.div`
 
@@ -18,20 +17,25 @@ export const Container = styled.div`
 
     main {
       position: relative;
-      width: 75%;
+      /* width: 75%;
       height: 80%;
-      min-height: 530px;
-
-      background-image: url(${bgLogin});
-      background-size: cover;
-      background-repeat: no-repeat;
-
-      border-radius: 20px;
-      box-shadow: 1px 1px 10px #3e3e3e;
+      min-height: 530px; */
+      padding: 60px 90px;
 
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
+    }
+
+    
+  .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+
+      border-radius: 10px;
+      box-shadow: 1px 1px 5px #6e6e6e;
     }
 
     h1 {

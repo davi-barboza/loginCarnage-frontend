@@ -1,18 +1,20 @@
 import Head from 'next/head'
-import LoginBox from '../components/Login'
+import ComicSearch from '../components/ComicSearch'
 import { Container } from '../styles/pages/Home'
 
 export default function Home() {
   return (
     <Container>
       <Head>
-        <title>Carnage | Login</title>
+        <title>Marvel | Home</title>
       </Head>
 
       <main>
-        <LoginBox />
+        <div className="overlay" />
+        
+        <ComicSearch />
       </main>
-
+ 
     </Container>
   )
 }
