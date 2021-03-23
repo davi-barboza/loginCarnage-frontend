@@ -1,16 +1,16 @@
 import Head from 'next/head'
-import LoginBox from '../components/Login'
+import ResetPass from '../components/ResetPassword'
 import { Container } from '../styles/pages/Home'
 
-export default function Home() {
+export default function ResetPassword() {
   return (
     <Container>
       <Head>
-        <title>Carnage | Login</title>
+        <title>Carnage | Forgot Password</title>
       </Head>
 
       <main>
-        <LoginBox />
+        <ResetPass />
       </main>
 
     </Container>
