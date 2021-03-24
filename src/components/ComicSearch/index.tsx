@@ -1,64 +1,45 @@
 import { Container } from './styles';
 import { useEffect, useState } from 'react';
-import api from '../../services/api';
 import marvel from '../../assets/marvel.png'
-import CryptoJS from 'crypto-js';
-import axios from 'axios';
 
-interface Character {
-  name: string;
-  description: string;
-  thumbnail: string;
-  extension: string;
-}
+
+import { useRouter } from 'next/router';
+import { useMarvel } from '../../context/MarvelResponseContext';
 
 const ComicSearch: React.FC = () => {
-  const [character, setCharacter] = useState<string>('');
-  const [infoChar, setInfoChar] = useState();
-  
-  const publicKey = 'db71d5e3d55ad7f50892a89f12e7bbe2';
-  const privateKey = 'fca1690c8b406e5b1edfc02f43fdb5230c5a3abe';  
-  
-  async function handleSubmit() {
-    const timeStamps = Math.floor(Date.now() / 1000)
-    const hash = CryptoJS.MD5(timeStamps + privateKey + publicKey);
-    
-    const data = {
-      name: character,
-      ts: timeStamps,
-      apiKey: publicKey,
-      hash: hash,
-    }
+  const route = useRouter();
+  const { setIdChar, setCharName, charName, setCharDescription,
+    setThumbnailChar, timeStamps, publicKey, hash } = useMarvel();
 
-    fetch(`https://gateway.marvel.com:443/v1/public/characters?name=${data.name}&ts=${data.ts}&apikey=${data.apiKey}&hash=${data.hash}`)
+  async function handleSubmit() {
+
+    fetch(`https://gateway.marvel.com:443/v1/public/characters?name=${charName}&ts=${timeStamps}&apikey=${publicKey}&hash=${hash}`)
+      .then(response => { return response.json() })
       .then(response => {
-        return response.json();
-      })
-      .then(response => {
-        console.log(response)
+        setIdChar(response.data.results[0].id)
+        setCharName(response.data.results[0].name)
+        setCharDescription(response.data.results[0].description)
+        setThumbnailChar(response.data.results[0].thumbnail.path + '.' +
+          response.data.results[0].thumbnail.extension)
+
+        route.push('/comics');
       })
       .catch(error => {
         return error;
       })
-
   }
 
   return (
     <Container method="POST">
+      <img src={marvel} alt="Marvel" />
 
-      <img src={marvel} alt="Marvel"/>
-
-      <input type="text" name="character" value={character} onChange={ e => setCharacter(e.target.value)} placeholder="Character"/>
-      {/* <input type="text" name="password" value={password} onChange={ e => setPassword(e.target.value)} placeholder="Character"/> */}
+      <input type="text" name="character" value={charName} onChange={e => setCharName(e.target.value)} placeholder="Character" />
 
       <button type="button" onClick={handleSubmit}>Continue</button>
 
       <div className="footer">
-        <p>What do you want to read today?</p>
+        <p>Choose your character and have fun!</p>
       </div>
-
-      <p></p>
-
     </Container>
   );
 }
